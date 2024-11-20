@@ -1,1 +1,1 @@
-console.log("Welcome to the dummy website!");
+console.log("Welcome to the super website!");
