@@ -2,8 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #4e0404;
+    color: #ffffff;
 }
 
 header {
@@ -40,5 +40,5 @@ footer {
     text-align: center;
     padding: 10px 0;
     background-color: #333;
-    color: white;
+    color: rgb(255, 255, 255);
 }
