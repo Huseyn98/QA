@@ -1,7 +1,6 @@
 {
   "name": "qa",
   "version": "1.0.0",
-  "description": "",
   "main": "script.js",
   "scripts": {
     "start": "live-server"
@@ -10,11 +9,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "live-server": "^1.2.0"
+    "live-server": "^1.2.2"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
+    "dotenv": "^16.5.0",
     "express": "^4.21.1",
     "mysql2": "^3.11.4"
-  }
+  },
+  "description": ""
 }
