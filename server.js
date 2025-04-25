@@ -37,9 +37,19 @@ db.connect((err) => {
 // Endpoint to handle form submission
 app.post('/submit-form', (req, res) => {
     const { name, email, message } = req.body;
-    console.log('Form submitted:', { name, email, message });
-    res.send('Thank you for your submission!');
-});
+  
+    const query = 'INSERT INTO submissions (name, email, message) VALUES (?, ?, ?)';
+    db.query(query, [name, email, message], (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err);
+        res.status(500).send('Database error');
+      } else {
+        console.log('Data inserted:', result);
+        res.send('Thank you for your submission!');
+      }
+    });
+  });
+  
 
 // Start the server
 app.listen(PORT, () => {
