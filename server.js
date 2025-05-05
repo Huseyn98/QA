@@ -10,12 +10,6 @@ const PORT = 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.post('/submit-form', (req, res) => {
-    console.log('Raw form data:', req.body); // This should log the form data.
-    res.send('Thank you for your submission!');
-});
-
-
 app.use(express.static('public'));
 
 // MySQL connection
@@ -34,22 +28,34 @@ db.connect((err) => {
     console.log('Connected to MySQL database.');
 });
 
-// Endpoint to handle form submission
+// ✅ Endpoint to handle form submission
 app.post('/submit-form', (req, res) => {
     const { name, email, message } = req.body;
+    console.log('Raw form data:', req.body);  // still logs the form data
   
     const query = 'INSERT INTO submissions (name, email, message) VALUES (?, ?, ?)';
     db.query(query, [name, email, message], (err, result) => {
-      if (err) {
-        console.error('Error inserting data:', err);
-        res.status(500).send('Database error');
-      } else {
-        console.log('Data inserted:', result);
-        res.send('Thank you for your submission!');
-      }
+        if (err) {
+            console.error('Error inserting data:', err);
+            res.status(500).send('Database error');
+        } else {
+            console.log('Data inserted:', result);
+            res.send('Thank you for your submission!');
+        }
     });
+});
+
+app.get('/submissions', (req, res) => {
+  db.query('SELECT * FROM submissions', (err, results) => {
+      if (err) {
+          console.error('Error fetching data:', err);
+          res.status(500).send('Database error');
+      } else {
+          res.json(results); // Sends the data as JSON
+      }
   });
-  
+});
+
 
 // Start the server
 app.listen(PORT, () => {
